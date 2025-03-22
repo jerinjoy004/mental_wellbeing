@@ -7,4 +7,166 @@
     <title>MindWell - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .navbar-logo {
+            color: #4F46E5;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        .navbar-menu a {
+            color: #4B5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar-menu a:hover {
+            color: #4F46E5;
+        }
+        .navbar-menu a.active {
+            color: #4F46E5;
+        }
+        .profile-container {
+            max-width: 800px;
+            margin: 120px auto 40px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background-color: #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #4F46E5;
+        }
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .profile-email {
+            color: #6B7280;
+            margin-bottom: 1rem;
+        }
+        .assessment-button {
+            background-color: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .assessment-button:hover {
+            background-color: #4338CA;
+        }
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .stat-card {
+            background-color: #F9FAFB;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4F46E5;
+        }
+        .stat-label {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="#  ">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index2.html">Wellness</a></li>
+                <li><a href="index3.html">Support</a></li>
+                <li><a href="index4.html">Fellowship</a></li>
+            </ul>
+            <button>Sign In</button>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">👤</div>
+            <h1 class="profile-name">John Doe</h1>
+            <p class="profile-email">john.doe@example.com</p>
+            <a href="assessment.html" class="assessment-button">Take Assessment</a>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Assessments Taken</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Wellness Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Resources Used</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
     
