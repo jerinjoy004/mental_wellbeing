@@ -54,6 +54,11 @@ body {
   color: #6a5acd; /* Purple on hover to match the template */
 }
 
+.navbar-menu a.active {
+  color: #6a5acd; /* Purple color for the active page */
+  font-weight: bold; /* Optional: makes it stand out more */
+}
+
 /* Logout Button */
 .navbar-container button {
   padding: 8px 20px;

@@ -62,6 +62,11 @@ body {
   color: #6a5acd;
 }
 
+.navbar-menu a.active {
+  color: #6a5acd; /* Purple color for the active page */
+  font-weight: bold; /* Optional: makes it stand out more */
+}
+
 /* Logout Button */
 .navbar-container button {
   padding: 10px 25px; /* Increased padding */
