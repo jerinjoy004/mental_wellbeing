@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
 
-            // Check if user has a profile
+            // Check if user has a profile in the public.users table
             const { data: profile, error: profileError } = await supabaseClient
-                .from('profiles')
+                .from('users')
                 .select('*')
                 .eq('id', data.user.id)
                 .single();
@@ -41,8 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Redirect based on profile existence
             if (!profile) {
+                // If no profile exists, redirect to profile.html to complete the profile
                 window.location.href = '../html/profile.html';
             } else {
+                // If profile exists, redirect to assessment.html
                 window.location.href = '../html/assessment.html';
             }
         } catch (error) {
@@ -78,7 +80,23 @@ document.addEventListener('DOMContentLoaded', () => {
 async function checkSession() {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
     if (session) {
-        // If user is already logged in, redirect to dashboard
-        window.location.href = '../html/assessment.html';
+        // If user is already logged in, check if they have a profile
+        const { data: profile, error: profileError } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+
+        if (profileError && profileError.code !== 'PGRST116') {
+            console.error('Error checking profile:', profileError.message);
+            return;
+        }
+
+        // Redirect based on profile existence
+        if (!profile) {
+            window.location.href = '../html/profile.html';
+        } else {
+            window.location.href = '../html/assessment.html';
+        }
     }
 }

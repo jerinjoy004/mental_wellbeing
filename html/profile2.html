@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Profile</h1>
+    <form id="profile-form">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="date" id="dob" required>
+      <input type="text" id="lifeline-name" placeholder="Lifeline Name" required>
+      <input type="email" id="lifeline-email" placeholder="Lifeline Email" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="profile-data"></div>
+    <button id="assessment-button">Go to Assessment</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
