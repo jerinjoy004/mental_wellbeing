@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell - Student Mental Health Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/mental_wellbeing/css/styles.css"> <!-- File path unchanged -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        /* Auth Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .auth-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index2.html">Wellness</a></li>
+                <li><a href="index3.html">Support</a></li>
+                <li><a href="index4.html">Fellowship</a></li>
+            </ul>
+            <div id="authButtons">
+                <a href="auth.html" id="loginButton" class="auth-button">Sign In</a>
+                <button id="logoutButton" class="auth-button hidden">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close-modal">&times;</span>
+            <div class="flex border-b mb-4">
+                <button id="loginTab" class="flex-1 py-4 px-6 text-center font-medium text-gray-500 hover:text-indigo-600 focus:outline-none border-b-2 border-indigo-600">
+                    Sign In
+                </button>
+                <button id="signupTab" class="flex-1 py-4 px-6 text-center font-medium text-gray-500 hover:text-indigo-600 focus:outline-none">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Welcome Back</h2>
+                <form id="loginFormElement" class="space-y-4">
+                    <div>
+                        <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="loginEmail" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="loginPassword" name="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signupForm" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Create Account</h2>
+                <form id="signupFormElement" class="space-y-4">
+                    <div>
+                        <label for="signupName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="signupName" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="signupEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="signupEmail" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="signupPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="signupPassword" name="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-pattern bg-indigo-900 bg-opacity-75 py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-bold mb-6">Supporting Student Mental Health</h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">Your mental well-being matters. Take the first step towards better mental health with our student-focused support tools and resources.</p>
+                <div class="space-x-4">
+                    <a href="#resources" class="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition duration-300">View Resources</a>
+                    <div id="loggedInActions" class="hidden inline-block">
+                        <a href="assessment.html" class="bg-white text-indigo-600 px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300">Take Assessment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Challenges Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Common Student Challenges</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Academic Pressure" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Academic Pressure</h3>
+                    <p class="text-gray-600">Managing deadlines, exams, and maintaining good grades while balancing other responsibilities.</p>
+                </div>
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Social Life" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Social Life</h3>
+                    <p class="text-gray-600">Building new relationships, maintaining friendships, and dealing with social anxiety.</p>
+                </div>
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Financial Stress" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Financial Stress</h3>
+                    <p class="text-gray-600">Managing student loans, living expenses, and finding part-time work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Mission & Vision</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Dedicated to breaking down barriers to mental health support for students through accessible, confidential, and evidence-based resources.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mission -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Our Mission</h3>
+                    <p class="text-gray-600">To provide accessible mental health support that empowers students to take control of their well-being journey.</p>
+                </div>
+
+                <!-- Vision -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Our Vision</h3>
+                    <p class="text-gray-600">A world where every student has access to quality mental health support, regardless of their background or circumstances.</p>
+                </div>
+
+                <!-- Values -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Our Values</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Accessibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Confidentiality</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Empowerment</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Mental Health Matters -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="text-indigo-600 mb-4 flex justify-center">
+                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-semibold text-gray-900 mb-6">Why Mental Health Matters for Students</h3>
+                <p class="text-gray-600 max-w-3xl mx-auto">Understanding and maintaining good mental health is crucial for academic success and personal growth. Here's why it matters:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Academic Success -->
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-4">Academic Success</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Better focus and concentration in class</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Improved time management skills</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Enhanced exam performance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Personal Growth -->
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-4">Personal Growth</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Stronger relationships and social connections</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Better emotional resilience</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Improved self-awareness</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Life Balance -->
+                <div class="bg-indigo-50 rounded-lg p-6 transform transition-all hover:scale-105">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-4">Life Balance</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Healthy work-life boundaries</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Stress management skills</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Better physical health</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Section (Logged In Only) -->
+    <!-- <section id="assessment" class="py-16 bg-gray-50 hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Student Mental Health Assessment</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <p class="text-gray-600 mb-6 text-center">Take our confidential assessment to understand your current mental well-being and receive personalized recommendations.</p>
+                <form id="assessmentForm" class="space-y-6"> -->
+                    <!-- Depression Questions (PHQ-9) -->
+                    <!-- <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Depression Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">Little interest or pleasure in doing things?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div> -->
+                            <!-- <div class="question">
+                                <p class="text-gray-700">Feeling down, depressed, or hopeless?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Trouble falling or staying asleep, or sleeping too much?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Anxiety Questions (GAD-7) -->
+                    <!-- <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Anxiety Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">Feeling nervous, anxious, or on edge?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Not being able to stop or control worrying?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Worrying too much about different things?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Academic Stress Questions -->
+                    <!-- <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Academic Stress Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">How is your academic performance affecting your mental health?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Not affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Slightly affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Moderately affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Significantly affected</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">How often do you feel overwhelmed by academic responsibilities?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Never</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Sometimes</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Often</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Almost always</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">How well are you managing your study-life balance?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Very well</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Fairly well</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Somewhat poorly</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2">Very poorly</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300">
+                        Submit Assessment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Mood Tracker Section (Logged In Only) -->
+    <!-- <section id="mood-tracker" class="py-16 bg-white hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Student Mood Tracker</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Track Your Daily Mood</h3>
+                    <p class="text-gray-600 mb-4">Monitor your emotional well-being and identify patterns that might affect your academic performance.</p>
+                    <textarea id="moodInput" class="w-full p-4 border rounded-lg" rows="4" placeholder="How are you feeling today? What's on your mind?"></textarea>
+                    <div class="mt-4">
+                        <button id="analyzeMood" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
+                            Track Mood
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <canvas id="moodChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Student Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Study Tips Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Study Tips" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Study Tips</h3>
+                    <p class="text-gray-600 mb-4">Learn effective study techniques and time management strategies.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-700 flex items-center">
+                        View Tips
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Campus Support Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campus Support" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Campus Support</h3>
+                    <p class="text-gray-600 mb-4">Connect with campus counseling and mental health services.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-700 flex items-center">
+                        Find Support
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Peer Support Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105">
+                    <div class="mb-6">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Peer Support" class="w-full h-48 object-cover rounded-lg mb-4">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Peer Support Groups</h3>
+                    <p class="text-gray-600 mb-4">Join student-led support groups and share experiences.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-700 flex items-center">
+                        Join Groups
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p>© 2024 MindWell. All rights reserved.</p>
+                <p class="mt-4">If you're in crisis, please contact your campus counseling center or emergency services.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+       
+        // Update UI when page loads
+        // updateAuthUI();
+
+        // Handle assessment form submission
+        // document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+            
+            // Calculate scores
+            // let depressionScore = 0;
+            // let anxietyScore = 0;
+            // let academicScore = 0;
+
+            // Calculate depression score
+            // for (let i = 1; i <= 3; i++) {
+            //     const value = document.querySelector(`input[name="depression${i}"]:checked`)?.value || 0;
+            //     depressionScore += parseInt(value);
+            // }
+
+            // Calculate anxiety score
+            // for (let i = 1; i <= 3; i++) {
+            //     const value = document.querySelector(`input[name="anxiety${i}"]:checked`)?.value || 0;
+            //     anxietyScore += parseInt(value);
+            // }
+
+            // Calculate academic stress score
+            // for (let i = 1; i <= 3; i++) {
+            //     const value = document.querySelector(`input[name="academic${i}"]:checked`)?.value || 0;
+            //     academicScore += parseInt(value);
+            // }
+
+            // Determine severity levels
+            // const depressionLevel = depressionScore <= 4 ? 'Minimal' : 
+            //                       depressionScore <= 9 ? 'Mild' : 
+            //                       depressionScore <= 14 ? 'Moderate' : 'Severe';
+
+            // const anxietyLevel = anxietyScore <= 4 ? 'Minimal' : 
+            //                    anxietyScore <= 9 ? 'Mild' : 
+            //                    anxietyScore <= 14 ? 'Moderate' : 'Severe';
+
+            // const academicLevel = academicScore <= 3 ? 'Well-managed' : 
+            //                     academicScore <= 6 ? 'Moderate stress' : 
+            //                     academicScore <= 9 ? 'High stress' : 'Overwhelming';
+
+            // Show results
+        //     alert(`Assessment Results:\n\nDepression: ${depressionLevel}\nAnxiety: ${anxietyLevel}\nAcademic Stress: ${academicLevel}\n\nPlease note: This is a self-assessment tool and not a substitute for professional diagnosis. If you're experiencing significant distress, please seek help from a mental health professional.`);
+        // });
+    </script>
+</body>
+</html> 

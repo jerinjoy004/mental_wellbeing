@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MindWell</title>
+    <link rel="stylesheet" href="/mental_wellbeing/css/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hero-about {
+            background: linear-gradient(rgba(106, 90, 205, 0.8), rgba(106, 90, 205, 0.8)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-about h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-about p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #6a5acd;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .value-card {
+            background: #f8f8ff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(106, 90, 205, 0.1);
+        }
+
+        .value-card img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #6a5acd;
+            margin-bottom: 15px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background: #f8f8ff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            color: #6a5acd;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: #f8f8ff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #6a5acd;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .section-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: #f8f8ff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(106, 90, 205, 0.1);
+        }
+
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: #6a5acd;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="index2.html">Wellness</a></li>
+                <li><a href="index3.html">Support</a></li>
+                <li><a href="index4.html">Fellowship</a></li>
+            </ul>
+            <div id="authButtons">
+                <a href="auth.html" id="loginButton" class="auth-button">Sign In</a>
+                <button id="logoutButton" class="auth-button hidden">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-about">
+        <div class="container">
+            <h1>About MindWell</h1>
+            <p>Empowering students to prioritize their mental health and achieve their full potential</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Our Story Section -->
+        <div class="section">
+            
+            <h2>Our Story</h2>
+            <p>MindWell was founded in 2023 with a simple yet powerful mission: to make mental health support accessible, stigma-free, and tailored to the unique needs of students. We recognized that the academic journey, while rewarding, often comes with significant mental health challenges that can impact students' well-being and academic success.</p>
+            <p>What started as a small campus initiative has grown into a comprehensive platform that combines technology, peer support, and professional resources to create a supportive community for students navigating their mental health journey.</p>
+        </div>
+
+        <!-- Our Values Section -->
+        <div class="section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" alt="Accessibility icon">
+                    <h3>Accessibility</h3>
+                    <p>Making mental health support available to all students, regardless of their circumstances.</p>
+                </div>
+                <div class="value-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1534/1534939.png" alt="Empowerment icon">
+                    <h3>Empowerment</h3>
+                    <p>Providing tools and resources that help students take control of their mental well-being.</p>
+                </div>
+                <div class="value-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1534/1534940.png" alt="Community icon">
+                    <h3>Community</h3>
+                    <p>Building a supportive network where students can connect, share, and grow together.</p>
+                </div>
+                <div class="value-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1534/1534941.png" alt="Innovation icon">
+                    <h3>Innovation</h3>
+                    <p>Using technology to create effective, modern solutions for mental health support.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- What We Do Section -->
+        <div class="section">
+            <h2>What We Do</h2>
+            <p>At MindWell, we provide comprehensive mental health support through various channels and services:</p>
+            <div class="values-grid">
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209125.png" alt="Assessment icon">
+                    <h3>Mental Health Assessment</h3>
+                    <p>Confidential self-assessment tools to help students understand their mental well-being and get personalized recommendations.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1189/1189182.png" alt="Peer Support icon">
+                    <h3>Peer Support Network</h3>
+                    <p>Connect with fellow students in a safe, moderated environment to share experiences and support each other.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209145.png" alt="Professional Resources icon">
+                    <h3>Professional Resources</h3>
+                    <p>Access to licensed counselors, mental health resources, and crisis support services when needed.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209133.png" alt="Wellness Tools icon">
+                    <h3>Wellness Tools</h3>
+                    <p>Daily mood tracking, meditation guides, stress management techniques, and other practical tools for maintaining mental health.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Team Section -->
+        <div class="section">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Team collaboration" class="section-image">
+            <h2>Our Team</h2>
+            <p>Meet the dedicated professionals working to support student mental health:</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Sarah Johnson">
+                    <h3>Sarah Johnson</h3>
+                    <p>Founder & CEO</p>
+                    <p>Clinical Psychologist</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="David Chen">
+                    <h3>David Chen</h3>
+                    <p>Head of Student Support</p>
+                    <p>Licensed Counselor</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Emily Rodriguez">
+                    <h3>Emily Rodriguez</h3>
+                    <p>Community Manager</p>
+                    <p>Mental Health Advocate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section">
+          
+            <h2>Get in Touch</h2>
+            <p>We're always here to help. Reach out to us:</p>
+            <p>Email: support@mindwell.edu</p>
+            <p>Phone: (555) 123-4567</p>
+            <p>Address: 123 Wellness Street, Education City, ST 12345</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 MindWell. All rights reserved.</p>
+        <p>If you're in crisis, please contact your campus counseling center or emergency services.</p>
+    </footer>
+
+    <script>
+        // Check login status and update UI
+        function updateAuthUI() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const loginButton = document.getElementById('loginButton');
+            const logoutButton = document.getElementById('logoutButton');
+
+            if (isLoggedIn) {
+                loginButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+            } else {
+                loginButton.classList.remove('hidden');
+                logoutButton.classList.add('hidden');
+            }
+        }
+
+        // Handle logout
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userPassword');
+            window.location.href = 'index.html';
+        });
+
+        // Update UI when page loads
+        updateAuthUI();
+    </script>
+</body>
+</html>
