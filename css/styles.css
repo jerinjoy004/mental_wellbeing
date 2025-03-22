@@ -1,0 +1,95 @@
+/* Navigation Styles */
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5a4bbd;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.navbar-menu a {
+    color: #4b5563;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+    color: #5a4bbd;
+}
+
+.navbar-menu a.active {
+    color: #5a4bbd;
+}
+
+/* Auth Button Styles */
+.auth-button {
+    background-color: #5a4bbd;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #5a4bbd;
+}
+
+.auth-button.hidden {
+    display: none;
+}
+
+/* Form Styles */
+.form-radio {
+    color: #5a4bbd;
+}
+
+.form-radio:checked {
+    background-color: #5a4bbd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .navbar-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    #authButtons {
+        margin-top: 1rem;
+    }
+}

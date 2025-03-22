@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment - MindWell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/mental_wellbeing/css/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-input {
+            @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+        }
+        .form-radio {
+            @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300;
+        }
+        .question {
+            @apply bg-white p-4 rounded-lg shadow-sm;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index2.html">Wellness</a></li>
+                <li><a href="index3.html">Support</a></li>
+                <li><a href="index4.html">Fellowship</a></li>
+            </ul>
+            <div id="authButtons">
+                <a href="auth.html" id="loginButton" class="auth-button">Sign In</a>
+                <button id="logoutButton" class="auth-button hidden">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Assessment Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Student Mental Health Assessment</h2>
+            
+            <!-- Assessment Form -->
+            <div id="assessmentForm" class="bg-white rounded-lg shadow-lg p-8">
+                <p class="text-gray-600 mb-6 text-center">Take our confidential assessment to understand your current mental well-being and receive personalized recommendations.</p>
+                <form id="assessmentFormElement" class="space-y-6">
+                    <!-- Depression Questions (PHQ-9) -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Depression Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">Little interest or pleasure in doing things?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Feeling down, depressed, or hopeless?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Trouble falling or staying asleep, or sleeping too much?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="depression3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anxiety Questions (GAD-7) -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Anxiety Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">Feeling nervous, anxious, or on edge?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Not being able to stop or control worrying?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">Worrying too much about different things?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not at all</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Several days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">More than half the days</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="anxiety3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Nearly every day</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Stress Questions -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Academic Stress Assessment</h3>
+                        <div class="space-y-4">
+                            <div class="question">
+                                <p class="text-gray-700">How is your academic performance affecting your mental health?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Not affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Slightly affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Moderately affected</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic1" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Significantly affected</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">How often do you feel overwhelmed by academic responsibilities?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Never</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Sometimes</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Often</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic2" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Almost always</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p class="text-gray-700">How well are you managing your study-life balance?</p>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="0" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Very well</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="1" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Fairly well</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="2" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Somewhat poorly</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="academic3" value="3" class="form-radio text-indigo-600">
+                                        <span class="ml-2 text-gray-700">Very poorly</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition duration-300">
+                        Submit Assessment
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="mt-8 bg-white rounded-lg shadow-lg p-8 hidden">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center">Your Assessment Results</h3>
+                
+                <!-- Results Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-indigo-50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Depression Level</h4>
+                        <p id="depressionResult" class="text-2xl font-bold text-indigo-600"></p>
+                        <p id="depressionDescription" class="text-gray-600 mt-2"></p>
+                    </div>
+                    <div class="bg-indigo-50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Anxiety Level</h4>
+                        <p id="anxietyResult" class="text-2xl font-bold text-indigo-600"></p>
+                        <p id="anxietyDescription" class="text-gray-600 mt-2"></p>
+                    </div>
+                    <div class="bg-indigo-50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Academic Stress</h4>
+                        <p id="academicResult" class="text-2xl font-bold text-indigo-600"></p>
+                        <p id="academicDescription" class="text-gray-600 mt-2"></p>
+                    </div>
+                </div>
+
+                <!-- AI Analysis -->
+                <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">AI-Powered Analysis</h4>
+                    <div id="aiAnalysis" class="space-y-4">
+                        <!-- AI analysis will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Personalized Recommendations -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Personalized Recommendations</h4>
+                    <div id="recommendations" class="space-y-4">
+                        <!-- Recommendations will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Action Plan -->
+                <div class="bg-green-50 rounded-lg p-6 mt-8">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Your Action Plan</h4>
+                    <div id="actionPlan" class="space-y-4">
+                        <!-- Action plan will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="mt-8 p-4 bg-yellow-50 rounded-lg">
+                    <p class="text-yellow-800 text-sm">
+                        <strong>Important Note:</strong> This is a self-assessment tool and not a substitute for professional diagnosis. If you're experiencing significant distress, please seek help from a mental health professional.
+                    </p>
+                </div>
+
+                <!-- Retake Assessment Button -->
+                <div class="mt-8 text-center">
+                    <button id="retakeAssessment" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
+                        Retake Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p>© 2024 MindWell. All rights reserved.</p>
+                <p class="mt-4">If you're in crisis, please contact your campus counseling center or emergency services.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check login status and update UI
+        // function updateAuthUI() {
+        //     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        //     const loginButton = document.getElementById('loginButton');
+        //     const logoutButton = document.getElementById('logoutButton');
+        //     const assessmentForm = document.getElementById('assessmentForm');
+        //     const resultsSection = document.getElementById('resultsSection');
+
+        //     if (isLoggedIn) {
+        //         loginButton.classList.add('hidden');
+        //         logoutButton.classList.remove('hidden');
+        //         assessmentForm.classList.remove('hidden');
+        //         resultsSection.classList.add('hidden');
+        //     } else {
+        //         loginButton.classList.remove('hidden');
+        //         logoutButton.classList.add('hidden');
+        //         assessmentForm.classList.add('hidden');
+        //         resultsSection.classList.add('hidden');
+        //         window.location.href = 'auth.html';
+        //     }
+        // }
+
+        // Handle logout
+        // document.getElementById('logoutButton').addEventListener('click', function() {
+        //     localStorage.removeItem('isLoggedIn');
+        //     localStorage.removeItem('userEmail');
+        //     localStorage.removeItem('userPassword');
+        //     window.location.href = 'index.html';
+        // });
+
+        // Update UI when page loads
+        // updateAuthUI();
+
+        // Handle assessment form submission
+        document.getElementById('assessmentFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calculate scores
+            let depressionScore = 0;
+            let anxietyScore = 0;
+            let academicScore = 0;
+
+            // Calculate depression score
+            for (let i = 1; i <= 3; i++) {
+                const value = document.querySelector(`input[name="depression${i}"]:checked`)?.value || 0;
+                depressionScore += parseInt(value);
+            }
+
+            // Calculate anxiety score
+            for (let i = 1; i <= 3; i++) {
+                const value = document.querySelector(`input[name="anxiety${i}"]:checked`)?.value || 0;
+                anxietyScore += parseInt(value);
+            }
+
+            // Calculate academic stress score
+            for (let i = 1; i <= 3; i++) {
+                const value = document.querySelector(`input[name="academic${i}"]:checked`)?.value || 0;
+                academicScore += parseInt(value);
+            }
+
+            // Determine severity levels
+            const depressionLevel = depressionScore <= 4 ? "Minimal" : 
+                                  depressionScore <= 9 ? "Mild" : 
+                                  depressionScore <= 14 ? "Moderate" : "Severe";
+
+            const anxietyLevel = anxietyScore <= 4 ? "Minimal" : 
+                               anxietyScore <= 9 ? "Mild" : 
+                               anxietyScore <= 14 ? "Moderate" : "Severe";
+
+            const academicLevel = academicScore <= 3 ? "Well-managed" : 
+                                academicScore <= 6 ? "Moderate stress" : 
+                                academicScore <= 9 ? "High stress" : "Overwhelming";
+
+            // Update results section
+            document.getElementById('depressionResult').textContent = depressionLevel;
+            document.getElementById('anxietyResult').textContent = anxietyLevel;
+            document.getElementById('academicResult').textContent = academicLevel;
+
+            // Add descriptions
+            document.getElementById('depressionDescription').textContent = 
+                `Score: ${depressionScore}/9 - ${getDepressionDescription(depressionLevel)}`;
+            document.getElementById('anxietyDescription').textContent = 
+                `Score: ${anxietyScore}/9 - ${getAnxietyDescription(anxietyLevel)}`;
+            document.getElementById('academicDescription').textContent = 
+                `Score: ${academicScore}/9 - ${getAcademicDescription(academicLevel)}`;
+
+            // Generate and display AI analysis
+            const aiAnalysis = generateAIAnalysis(depressionLevel, anxietyLevel, academicLevel);
+            const aiAnalysisDiv = document.getElementById('aiAnalysis');
+            aiAnalysisDiv.innerHTML = aiAnalysis.map(analysis => 
+                `<div class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    <span class="text-gray-700">${analysis}</span>
+                </div>`
+            ).join('');
+
+            // Generate and display recommendations
+            const recommendations = generateRecommendations(depressionLevel, anxietyLevel, academicLevel);
+            const recommendationsDiv = document.getElementById('recommendations');
+            recommendationsDiv.innerHTML = recommendations.map(rec => 
+                `<div class="flex items-start">
+                    <svg class="w-5 h-5 text-indigo-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="text-gray-700">${rec}</span>
+                </div>`
+            ).join('');
+
+            // Generate and display action plan
+            const actionPlan = generateActionPlan(depressionLevel, anxietyLevel, academicLevel);
+            const actionPlanDiv = document.getElementById('actionPlan');
+            actionPlanDiv.innerHTML = actionPlan.map(action => 
+                `<div class="flex items-start">
+                    <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                    <span class="text-gray-700">${action}</span>
+                </div>`
+            ).join('');
+
+            // Show results section
+            document.getElementById('assessmentForm').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+        });
+
+        // Handle retake assessment
+        document.getElementById('retakeAssessment').addEventListener('click', function() {
+            document.getElementById('assessmentForm').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('assessmentFormElement').reset();
+        });
+
+        // Helper functions for descriptions and recommendations
+        function getDepressionDescription(level) {
+            const descriptions = {
+                "Minimal": "Your depression symptoms are minimal. Continue monitoring your mood.",
+                "Mild": "You're experiencing mild depression symptoms. Consider talking to a counselor.",
+                "Moderate": "You're showing moderate depression symptoms. Professional help is recommended.",
+                "Severe": "You're experiencing severe depression symptoms. Please seek immediate professional help."
+            };
+            return descriptions[level];
+        }
+
+        function getAnxietyDescription(level) {
+            const descriptions = {
+                "Minimal": "Your anxiety levels are minimal. Keep practicing stress management.",
+                "Mild": "You're experiencing mild anxiety. Consider stress-reduction techniques.",
+                "Moderate": "You're showing moderate anxiety. Professional support may be helpful.",
+                "Severe": "You're experiencing severe anxiety. Please seek immediate professional help."
+            };
+            return descriptions[level];
+        }
+
+        function getAcademicDescription(level) {
+            const descriptions = {
+                "Well-managed": "You're managing academic stress well. Keep up the good work!",
+                "Moderate stress": "You're experiencing moderate academic stress. Consider time management strategies.",
+                "High stress": "You're under significant academic stress. Academic counseling may help.",
+                "Overwhelming": "You're feeling overwhelmed by academic pressure. Please seek academic support."
+            };
+            return descriptions[level];
+        }
+
+        function generateAIAnalysis(depression, anxiety, academic) {
+            const analysis = [];
+            
+            // Overall mental health analysis
+            if (depression === "Severe" || anxiety === "Severe") {
+                analysis.push("Based on your responses, you're experiencing significant emotional distress. This is a critical time to prioritize your mental health.");
+            } else if (depression === "Moderate" || anxiety === "Moderate") {
+                analysis.push("Your responses indicate moderate emotional challenges. While you're managing, additional support could be beneficial.");
+            } else {
+                analysis.push("Your responses suggest you're generally managing well, though there may be areas for improvement.");
+            }
+
+            // Academic impact analysis
+            if (academic === "Overwhelming") {
+                analysis.push("Your academic stress levels are significantly impacting your well-being. This level of stress can affect both your mental health and academic performance.");
+            } else if (academic === "High stress") {
+                analysis.push("You're experiencing considerable academic pressure. Finding balance between academic responsibilities and self-care is important.");
+            }
+
+            // Interconnection analysis
+            if ((depression === "Moderate" || depression === "Severe") && (academic === "High stress" || academic === "Overwhelming")) {
+                analysis.push("There appears to be a strong connection between your academic stress and emotional well-being. Addressing both areas together may be most effective.");
+            }
+
+            return analysis;
+        }
+
+        function generateRecommendations(depression, anxiety, academic) {
+            const recommendations = [];
+
+            // Depression recommendations
+            if (depression === "Mild") {
+                recommendations.push("Consider scheduling a consultation with a campus counselor");
+                recommendations.push("Practice daily self-care activities like meditation or exercise");
+            } else if (depression === "Moderate" || depression === "Severe") {
+                recommendations.push("Schedule an appointment with a mental health professional");
+                recommendations.push("Reach out to campus support services");
+                recommendations.push("Consider joining a support group");
+            }
+
+            // Anxiety recommendations
+            if (anxiety === "Mild") {
+                recommendations.push("Try deep breathing exercises and mindfulness techniques");
+                recommendations.push("Establish a regular sleep schedule");
+            } else if (anxiety === "Moderate" || anxiety === "Severe") {
+                recommendations.push("Consult with a mental health professional");
+                recommendations.push("Practice stress management techniques regularly");
+                recommendations.push("Consider anxiety management workshops");
+            }
+
+            // Academic recommendations
+            if (academic === "Moderate stress") {
+                recommendations.push("Meet with an academic advisor to discuss workload management");
+                recommendations.push("Create a study schedule and stick to it");
+            } else if (academic === "High stress" || academic === "Overwhelming") {
+                recommendations.push("Schedule an appointment with academic counseling");
+                recommendations.push("Consider reducing course load if possible");
+                recommendations.push("Join study groups for peer support");
+            }
+
+            // General recommendations
+            recommendations.push("Maintain a healthy lifestyle with regular exercise and balanced nutrition");
+            recommendations.push("Stay connected with friends and family");
+            recommendations.push("Keep track of your mood patterns using our mood tracker");
+
+            return recommendations;
+        }
+
+        function generateActionPlan(depression, anxiety, academic) {
+            const actions = [];
+            
+            // Immediate actions
+            if (depression === "Severe" || anxiety === "Severe") {
+                actions.push("Contact campus counseling services immediately");
+                actions.push("Reach out to a trusted friend or family member");
+                actions.push("Consider speaking with your academic advisor about accommodations");
+            }
+
+            // Short-term actions (next 1-2 weeks)
+            if (depression === "Moderate" || anxiety === "Moderate") {
+                actions.push("Schedule a counseling appointment within the next week");
+                actions.push("Start a daily mood tracking journal");
+                actions.push("Begin practicing 10-minute mindfulness exercises daily");
+            }
+
+            // Long-term actions (next month)
+            actions.push("Review and adjust your academic schedule");
+            actions.push("Create a weekly self-care routine");
+            actions.push("Set up regular check-ins with a counselor or mentor");
+
+            return actions;
+        }
+    </script>
+</body>
+</html> 
