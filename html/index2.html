@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell - Personalized Suggestions & Resources</title>
+    <link rel="stylesheet" href="/css/styles2.css"> <!-- File path unchanged -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" onclick="window.location.href='index2.html'">Wellness</a></li>
+                <li><a href="#" onclick="window.location.href='index3.html'">Support</a></li>
+                <li><a href="#" onclick="window.location.href='index4.html'">Fellowship</a></li>
+            </ul>
+            <button>Logout</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Simplified, No Button) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Personalized Support for Your Mental Health</h1>
+            <p>Discover tailored suggestions and resources to help you manage stress, anxiety, and more.</p>
+        </div>
+    </section>
+
+    <!-- Suggestions & Resources Section -->
+    <section class="content">
+        <h1>Your Path to Better Mental Health</h1>
+        <p class="intro-text">Feeling overwhelmed? You’re not alone. Discover personalized suggestions and trusted resources designed to help you manage stress, find balance, and feel your best—starting today.</p>
+        <!-- Mental Health Improvement Features Section -->
+        <div class="mental-health-features">
+            <h2>Ways to Improve Your Mental Health</h2>
+            <div class="features-grid">
+                <!-- Exercise -->
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Exercise">
+                    <h3>Exercise</h3>
+                    <p>Regular physical activity can boost your mood, reduce stress, and improve overall mental well-being.</p>
+                    <button class="learn-more-btn" data-feature="exercise">Learn More</button>
+                </div>
+                <!-- Yoga -->
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Yoga">
+                    <h3>Yoga</h3>
+                    <p>Yoga combines physical poses, breathing exercises, and meditation to promote relaxation and mental clarity.</p>
+                    <button class="learn-more-btn" data-feature="yoga">Learn More</button>
+                </div>
+                <!-- Healthy and Mindful Eating -->
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Healthy Eating">
+                    <h3>Healthy & Mindful Eating</h3>
+                    <p>Eating a balanced diet and practicing mindful eating can support brain health and emotional stability.</p>
+                    <button class="learn-more-btn" data-feature="healthy-eating">Learn More</button>
+                </div>
+                <!-- Meditation -->
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Meditation">
+                    <h3>Meditation</h3>
+                    <p>Meditation helps calm the mind, reduce anxiety, and improve focus through mindfulness practices.</p>
+                    <button class="learn-more-btn" data-feature="meditation">Learn More</button>
+                </div>
+            </div>
+        </div>
+        <div class="suggestions-resources">
+            <!-- Suggestions -->
+            <div class="suggestions">
+                <h2>Suggestions for You</h2>
+                <div class="suggestion-card" id="suggestion-card">
+                    <p id="suggestion-text"></p>
+                    <div class="suggestion-buttons">
+                        <button id="prev-suggestion">Previous</button>
+                        <button id="next-suggestion">Next</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Resources -->
+            <div class="resources">
+                <h2>Resources</h2>
+                <ul id="resources-list">
+                    <!-- Resources will be populated by JavaScript -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Learn More Modal -->
+        <div class="modal" id="learn-more-modal">
+            <div class="modal-content">
+                <span class="close" id="close-modal">&times;</span>
+                <h3 id="modal-title"></h3>
+                <div id="modal-content-text"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/script2.js"></script> <!-- File path unchanged -->
+</body>
+</html>

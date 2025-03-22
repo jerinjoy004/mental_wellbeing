@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community & Support Groups</title>
+    <link rel="stylesheet" href="/css/styles4.css"> <!-- Fixed path -->
+</head>
+<body>
+    <!-- Navbar (Added to Match Template) -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" onclick="window.location.href='index2.html'">Wellness</a></li>
+                <li><a href="#" onclick="window.location.href='index3.html'">Support</a></li>
+                <li><a href="#" onclick="window.location.href='index4.html'">Fellowship</a></li>
+            </ul>
+            <button>Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Community & Support Groups</h1>
+        <p>Join a safe, anonymous space to connect with others.</p>
+
+        <!-- Topic Selection -->
+        <div class="topics">
+            <button class="topic-btn" data-topic="stress">Stress</button>
+            <button class="topic-btn" data-topic="anxiety">Anxiety</button>
+            <button class="topic-btn" data-topic="exam-pressure">Exam Pressure</button>
+        </div>
+
+        <!-- Forum Section -->
+        <div class="forum" id="forum">
+            <h2 id="forum-title">Select a Topic to Join</h2>
+            <div class="posts" id="posts"></div>
+            <textarea id="new-post" placeholder="Share your thoughts anonymously..."></textarea>
+            <button id="submit-post">Post</button>
+        </div>
+
+        <!-- Need Help Button -->
+        <button class="need-help" id="need-help">Need Help?</button>
+
+        <!-- Modal for Need Help -->
+        <div class="modal" id="help-modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h3>Need Help?</h3>
+                <p>Connect with a peer or get professional support.</p>
+                <button id="peer-chat">Chat with a Peer</button>
+                <button id="pro-help">Professional Help</button>
+            </div>
+        </div>
+
+        <!-- Daily Check-in -->
+        <div class="check-in">
+            <p>Daily Check-in: "You're not alone—keep going!"</p>
+        </div>
+    </div>
+
+    <script src="/js/script4.js"></script> <!-- Fixed path -->
+</body>
+</html>
