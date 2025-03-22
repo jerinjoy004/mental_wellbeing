@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - MindWell</title>
+    <link rel="stylesheet" href="/css/styles3.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">MindWell</a>
+            <ul class="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" onclick="window.location.href='index2.html'">Wellness</a></li>
+                <li><a href="#" onclick="window.location.href='index3.html'">Support</a></li>
+                <li><a href="#" onclick="window.location.href='index4.html'">Fellowship</a></li>
+            </ul>
+            <button>Logout</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Simplified, No Button) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Peer and Support</h1>
+            <p>Connect with friends and support each other through challenges.</p>
+        </div>
+    </section>
+
+    <!-- Peer Support Section -->
+    <section class="content">
+        <h1>Build Your Support Network</h1>
+        <p class="intro-text">Add friends, get notified if they need support, and use AI-generated prompts to start meaningful conversations.</p>
+
+        <!-- Add Friend Section -->
+        <div class="add-friend">
+            <h2>Add a Friend</h2>
+            <input type="text" id="friend-username" placeholder="Enter any username (e.g., john, sarah)">
+            <button id="add-friend-btn">Add Friend</button>
+        </div>
+
+        <!-- Friends List Section -->
+        <div class="friends-list">
+            <h2>Your Friends</h2>
+            <ul id="friends-list">
+                <!-- Friends will be populated by JavaScript -->
+            </ul>
+        </div>
+
+        <!-- Conversation Starters Modal -->
+        <div class="modal" id="conversation-modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h3>Support Your Friend</h3>
+                <p id="modal-friend-name"></p>
+                <div id="conversation-starters">
+                    <!-- AI-generated conversation starters will be populated here -->
+                </div>
+                <button id="start-chat-btn">Start Chat</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/script3.js"></script>
+</body>
+</html>
