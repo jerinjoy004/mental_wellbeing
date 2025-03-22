@@ -1,0 +1,20 @@
+{
+  "name": "mental_wellbeing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerinjoy004/mental_wellbeing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jerinjoy004/mental_wellbeing/issues"
+  },
+  "homepage": "https://github.com/jerinjoy004/mental_wellbeing#readme"
+}
